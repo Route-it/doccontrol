@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        
+        <record model="document_control_base.resource_condition" id="res_cond1">
+            <field name="name">Monotributista</field>
+            <field name="description">Persona Monotributista</field>
+        </record>
+        <record model="document_control_base.resource_condition" id="res_cond2">
+            <field name="name">Soldador Nivel 1</field>
+            <field name="description"></field>
+        </record>
+        <record model="document_control_base.resource_condition" id="res_cond3">
+            <field name="name">Soldador Nivel 2</field>
+            <field name="description"></field>
+        </record>
+        <record model="document_control_base.resource_condition" id="res_cond4">
+            <field name="name">Chofer de transporte personal</field>
+            <field name="description"></field>
+        </record>
+        <record model="document_control_base.resource_condition" id="res_cond5">
+            <field name="name">Chofer con licencia profesional</field>
+            <field name="description"></field>
+        </record>
+        <record model="document_control_base.resource_condition" id="res_cond6">
+            <field name="name">Relacion de dependencia</field>
+            <field name="description"></field>
+        </record>
+        <record model="document_control_base.resource_condition" id="res_cond7">
+            <field name="name">Operador</field>
+            <field name="description"></field>
+        </record>
+        <record model="document_control_base.resource_condition" id="res_cond8">
+            <field name="name">Externo</field>
+            <field name="description"></field>
+        </record>
+        
+    </data>
+</openerp>

@@ -1,0 +1,36 @@
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="document_control_base.expiration_form">
+			<field name="name">Vencimiento</field>
+			<field name="model">calendar.event</field>
+			<field name="inherit_id" ref="expirations.expiration_form" />
+			<field name="arch" type="xml">
+				<field name="res_id" position="replace">asd</field>
+				<field name="recurrency" position="replace">
+					<field name="recurrency" invisible="1"/>
+				</field>
+			</field>
+		</record>
+
+
+        <record id="view_partner_form" model="ir.ui.view">
+			<field name="name">res.partner.form.docs</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+
+				<notebook position="before">
+		            <field name="resource_condition_ids" widget="many2many_tags"/>
+				</notebook>
+				<notebook position="inside">
+                    	<page string="Documentos">
+                            <field name="document_ids" />
+                        </page>
+				</notebook>
+
+			</field>
+		</record>
+
+
+	</data>
+</openerp>

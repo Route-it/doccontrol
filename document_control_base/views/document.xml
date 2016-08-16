@@ -1,0 +1,86 @@
+<openerp>
+	<data>
+		<record id="document_control_base.document_list" model="ir.ui.view">
+			<field name="model">document_control_base.document</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="state"/>
+					<field name="expiration_id"/>
+				</tree>
+			</field>
+		</record>
+		<record id="document_control_base.document_form" model="ir.ui.view">
+			<field name="model">document_control_base.document</field>
+			<field name="arch" type="xml">
+				<form string="Documentos">
+					<sheet>
+						<label for="name" class="oe_edit_only" />
+						<h1>
+							<field name="name"  class="oe_edit_only"  />
+						</h1>
+						<label for="res_partner_id" class="oe_edit_only" />
+						<field name="res_partner_id" class="oe_edit_only" />
+						<group>
+							<group>
+								<field name="file_binary" filename="file_name" />
+								<field name="file_name" class="oe_inline oe_right"
+									invisible="1" />
+								<field name="document_name_id" />
+								<field name="document_condition_ids" widget="many2many_tags" />
+								<field name="description" />
+							</group>
+						</group>
+						<group>
+
+								<field name="no_expiration" />
+								<field name="expiration_id" 
+									attrs="{'invisible':[('no_expiration','=',True)]}"
+									context="{'form_view_ref': 'document_control_base.expiration_form','resources':'expirations','name':'Vencimiento:','res_partner_id':res_partner_id,'document_name_id':document_name_id}" />
+								<field name="in_renewal" />
+								<field name="state" readonly="1" class="oe_edit_only" />
+
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record id="document_control_base.document_set_list" model="ir.ui.view">
+			<field name="model">document_control_base.document_set</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="group_requirement_id"/>
+					<field name="control_date"/>
+				</tree>
+
+			</field>
+		</record>
+		<record id="document_control_base.document_set_form" model="ir.ui.view">
+			<field name="model">document_control_base.document_set</field>
+			<field name="arch" type="xml">
+				<form string="Documentos">
+					<sheet>
+						<label for="name" class="oe_edit_only" />
+						<h1>
+							<field name="name" />
+						</h1>
+						<group>
+							<group>
+								<field name="group_requirement_id" />
+								<field name="control_date"
+									context="{'form_view_ref': 'document_control_base.expiration_form','resources':'expirations', 'doc_expir_view':True}" />
+								<field name="partner_ids" />
+								<field name="document_ids" readonly="True" />
+								<field name="description" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+
+	</data>
+</openerp>

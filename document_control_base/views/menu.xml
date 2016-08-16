@@ -1,0 +1,69 @@
+<openerp>
+	<data>
+
+		<!-- actions opening views on models -->
+		<record model="ir.actions.act_window" id="document_control_base.action_window_document">
+			<field name="name">Lista de Documentos</field>
+			<field name="res_model">document_control_base.document</field>
+			<field name="context">{'doc_expir_view':True,'resources':'expirations'}</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<record model="ir.actions.act_window"
+			id="document_control_base.action_window_document_set">
+			<field name="name">Grupos de control</field>
+			<field name="res_model">document_control_base.document_set</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<!-- -->
+
+
+		<!-- Top menu item -->
+		<menuitem name="Administracion" id="document_control_base.menu_root" />
+
+		<!-- menu categories -->
+		<menuitem name="Control Documentario" id="document_control_base.category_documents_control" parent="document_control_base.menu_root" />
+		<menuitem name="Agenda" id="expirations.menu_root" parent="document_control_base.menu_root"/>
+
+		<!-- ACTIONS -->
+		<!-- CONTROL DOCUMENTARIO -->
+		<!-- lista de documentos -->	
+		<menuitem name="Listar Documentos" id="document_control_base.documents_list"
+			parent="document_control_base.category_documents_control" action="document_control_base.action_window_document" />
+		<!-- lista de Grupos de control -->	
+		<menuitem name="Grupos de control" id="document_control_base.documents_group_list"
+			parent="document_control_base.category_documents_control" action="document_control_base.action_window_document_set" />
+			
+			
+		<!-- CONTROL VENCIMIENTOS Y CALENDARIO -->
+		<!-- lista de venicimientos -->	
+		<menuitem name="Listar Vencimientos" id="expirations.menu_1_list" parent="expirations.menu_root"
+			action="expirations.action_expiration_event" />
+
+		<!-- lista de tipos de recordatorios -->	
+		<menuitem name="Recordatorios" id="expirations.menu_2"
+			parent="expirations.menu_root" action="expirations.alarm_action_window" />
+			
+	<!-- elminar -->			
+	<!--se elimina este: <menuitem name="Calendar" id="mail_menu_calendar" sequence="2" action="action_calendar_event" web_icon="calendar,static/description/icon.png" groups="base.group_user"/> -->
+<!--     <delete model="ir.ui.menu" id="calendar.mail_menu_calendar" /> -->
+
+	<!-- crear -->			
+<!--     <menuitem name="Calendario" id="calendar.mail_menu_calendar" sequence="2" action="calendar.action_calendar_event" web_icon="calendar,static/description/icon.png" groups="base.group_user" -->
+<!--     	parent=""/> -->
+			
+
+<!-- 	<delete model="ir.ui.menu" id="mail.menu_contacts"/> -->
+<!--     <menuitem name="Contactos" -->
+<!--         id="mail.menu_contacts" -->
+<!--         sequence="4" -->
+<!--         action="action_contacts" -->
+<!--         web_icon="mail,static/description/icon2.png" -->
+<!--         parent="mail.mail_channel_menu_root_chat" -->
+<!--         groups="base.group_user,base.group_partner_manager"/> -->
+
+
+
+
+
+	</data>
+</openerp>

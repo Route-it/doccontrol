@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        
+        <record model="document_control_base.document_name" id="doc_name">
+            <field name="name">Seguro De vida</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name1">
+            <field name="name">Poliza ART</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name1">
+            <field name="name">Recibo Haberes</field>
+        </record>
+
+    </data>
+</openerp>
