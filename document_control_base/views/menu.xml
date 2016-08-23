@@ -14,6 +14,12 @@
 			<field name="res_model">document_control_base.document_set</field>
 			<field name="view_mode">tree,form</field>
 		</record>
+		<record model="ir.actions.act_window"
+			id="document_control_base.action_window_document_requirement">
+			<field name="name">Requerimientos</field>
+			<field name="res_model">document_control_base.requirement</field>
+			<field name="view_mode">tree,form</field>
+		</record>
 		<!-- -->
 
 
@@ -32,6 +38,8 @@
 		<!-- lista de Grupos de control -->	
 		<menuitem name="Grupos de control" id="document_control_base.documents_group_list"
 			parent="document_control_base.category_documents_control" action="document_control_base.action_window_document_set" />
+		<menuitem name="Requerimientos" id="document_control_base.documents_requirement"
+			parent="document_control_base.category_documents_control" action="document_control_base.action_window_document_requirement" />
 			
 			
 		<!-- CONTROL VENCIMIENTOS Y CALENDARIO -->

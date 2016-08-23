@@ -61,6 +61,11 @@
 			<field name="model">document_control_base.document_set</field>
 			<field name="arch" type="xml">
 				<form string="Documentos">
+					<header>
+	                    <button name="compute_document_set_document_rel" string="Computar Documentos" type="object" class="oe_highlight" groups="base.group_user"/>
+<!-- 	                    <field name="state" widget="statusbar"  statusbar_visible="presupuestar,posible,arrancar,terminar,cobrar,cerrado" statusbar_colors='{"presupuestar":"blue"}' readonly="1"/> -->
+	                </header>
+					
 					<sheet>
 						<label for="name" class="oe_edit_only" />
 						<h1>
@@ -68,16 +73,31 @@
 						</h1>
 						<group>
 							<group>
+								<field name="id" invisible="1"/>
 								<field name="group_requirement_id" />
 								<field name="control_date"
 									context="{'form_view_ref': 'document_control_base.expiration_form','resources':'expirations', 'doc_expir_view':True}" />
 								<field name="partner_ids" />
-								<field name="document_ids" readonly="True" />
+								<field name="document_set_document_rel_ids" readonly="True" attrs="{'invisible':[('id','=', False)]}"/>
 								<field name="description" />
 							</group>
 						</group>
 					</sheet>
 				</form>
+			</field>
+		</record>
+		<record id="document_control_base.document_set_document_rel_list" model="ir.ui.view">
+			<field name="model">document_control_base.document_set_document_rel</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="document_set_id"/>
+					<field name="document_name_id"/>
+					<field name="presentation_date"/>
+					<field name="expiration_id"/>
+					<field name="res_partner_id"/>
+					<field name="state"/>
+				</tree>
 			</field>
 		</record>
 

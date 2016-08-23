@@ -11,7 +11,7 @@ def _get_resources_list(self):
 class group_requirement(models.Model):
     _name = 'document_control_base.group_requirement'
      
-    name = fields.Char("Nombre")
+    name = fields.Char("Nombre",compute='_compute_name',readonly=True)
     
     res_partner_id = fields.Many2one("res.partner","Cliente")
     
@@ -22,9 +22,9 @@ class group_requirement(models.Model):
     requirement_ids = fields.Many2many("document_control_base.requirement","group_req_requirement_rel", "group_requirement_id", "requirement_id", "Requerimientos")
 
     @api.one
-    @api.depends('res_partner_id','instance','expiration_date')
+    @api.depends('res_partner_id','instance')
     def _compute_name(self):
         instance = self.instance or ''
         date = self.expiration_date or ''
         resid = self.res_partner_id.name if self.res_partner_id else ''
-        self.name = resid.title()  + ' - ' + instance.title() + (' - (' + date + ')') if date else ''   
+        self.name = resid.title()  + ' - ' + instance.title() + (' - (' + date + ')' if date else '')   

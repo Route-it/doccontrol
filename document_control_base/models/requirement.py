@@ -11,7 +11,7 @@ def _get_resources_list(self):
 class requirement(models.Model):
     _name = 'document_control_base.requirement'
      
-    name = fields.Char("Nombre")
+    name = fields.Char("Nombre",compute='_compute_name')
      
     description = fields.Text('Descripcion')
 
@@ -21,3 +21,11 @@ class requirement(models.Model):
     resource_type = fields.Selection(_get_resources_list,'Tipo Recurso', required=True,help="Esta es una ayuda")
     condition_res_ids = fields.Many2many("document_control_base.resource_condition", "requirement_res_condition_rel", "requirement_id", "condition_id", "Condiciones del recurso")
 
+    @api.one
+    @api.depends('resource_type','document_name_id','condition_res_ids')
+    def _compute_name(self):
+        resource_type = self.resource_type or ''
+        name = self.document_name_id.name if self.document_name_id else ''
+        cond_res = " - ".join(str(cond.name) for cond in self.condition_res_ids)
+        cond_res_title = ' - ('+cond_res.title+')' if cond_res else '' 
+        self.name = resource_type.title() + ' - ' + name.title()  + cond_res_title    

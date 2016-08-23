@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Control Documentario - Base",
-   'version': '0.1',
+    'version': '0.1',
     'author': 'Route IT',
     'website': 'https://www.routeit.com.ar',
 
@@ -38,4 +38,9 @@
     'demo': [
         'demo/demo.xml',
     ],
+    'installable': True,
+    'application': True,
+    'auto_install': False,
+    #'post_init_hook': '_auto_install_l10n',
+
 }
