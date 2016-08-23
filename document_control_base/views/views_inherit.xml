@@ -20,6 +20,7 @@
 			<field name="arch" type="xml">
 
 				<notebook position="before">
+					<label for="resource_condition_ids"/>
 		            <field name="resource_condition_ids" widget="many2many_tags"/>
 				</notebook>
 				<notebook position="inside">

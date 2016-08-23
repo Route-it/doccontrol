@@ -10,6 +10,7 @@ from . import document_set
 from . import res_partner
 from . import expiration
 from . import group_requirement
+from . import group_req_requirement_rel
 from . import document_name
 
 

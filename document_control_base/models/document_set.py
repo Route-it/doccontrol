@@ -11,7 +11,7 @@ class document_set(models.Model):
      
     description = fields.Text('Descripcion')
 
-    group_requirement_id = fields.Many2one("document_control_base.group_requirement", "Requerimientos")
+    group_requirement_id = fields.Many2one("document_control_base.group_requirement", "Grupo de Requerimientos")
     
     partner_ids = fields.Many2many("res.partner","document_set_partner_rel", "document_set_id", "partner_id", "Recursos Involucrados")
     #document_set_id = fields.Many2many("document_control_base.document","document_set_document_rel_old","document_set_id", "document_id", "Documentos",readonly=True)
@@ -44,6 +44,7 @@ class document_set(models.Model):
         print 'onchange_group_requirement'
         res = []
         d_set_d_rel_obj = self.env['document_control_base.document_set_document_rel']
+        g_req_req_rel_obj = self.env['document_control_base.group_req_requirement_rel']
 
         #por cada requerimiento
         for req_id in self.group_requirement_id.requirement_ids:
@@ -66,6 +67,9 @@ class document_set(models.Model):
                         doc_added = False
                         defaults = {'res_partner_id':partner.id,'requirement_id':req_id.id,'document_name_id':req_id.document_name_id.id}
                         defaults.update({'document_set_id':self.id})  
+                        req_with_properties_id = g_req_req_rel_obj.search([('id','=',req_id.id)])
+                        priority = str(req_with_properties_id.priority) if req_with_properties_id.priority else False
+                        defaults.update({'priority':priority})  
                         if len(partner.document_ids)>0:
                             for doc in partner.document_ids:
                                 #busco el documento del partner que cumpla con las condiciones

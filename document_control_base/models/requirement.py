@@ -24,7 +24,12 @@ class requirement(models.Model):
     @api.one
     @api.depends('resource_type','document_name_id','condition_res_ids')
     def _compute_name(self):
-        resource_type = self.resource_type or ''
+        resource_type = ''
+        resource_types = _get_resources_list(self)
+        for i in range(0,len(resource_types)):
+            if self.resource_type == resource_types[i][0]:
+                resource_type = resource_types[i][1] 
+        
         name = self.document_name_id.name if self.document_name_id else ''
         cond_res = " - ".join(str(cond.name) for cond in self.condition_res_ids)
         cond_res_title = ' - ('+cond_res.title+')' if cond_res else '' 

@@ -66,6 +66,29 @@
 			</field>
 		</record>
 
+		<record id="document_control_base.group_req_requirement_rel_list" model="ir.ui.view">
+			<field name="model">document_control_base.group_req_requirement_rel</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="requirement_id"/>
+					<field name="group_requirement_id"/>
+					<field name="priority"/>
+				</tree>
+			</field>
+		</record>
+		<record id="document_control_base.group_req_requirement_rel_form" model="ir.ui.view">
+			<field name="model">document_control_base.group_req_requirement_rel</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name" />
+					<field name="requirement_id"/>
+					<field name="group_requirement_id"/>
+					<field name="priority"/>
+					<field name="penalty"/>
+				</tree>
+			</field>
+		</record>
 
 	</data>
 </openerp>

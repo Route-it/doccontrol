@@ -100,7 +100,32 @@
 				</tree>
 			</field>
 		</record>
-
+		<record id="document_control_base.document_set_document_rel_form" model="ir.ui.view">
+			<field name="model">document_control_base.document_set_document_rel</field>
+			<field name="arch" type="xml">
+				<form>
+				<sheet>
+					<group>
+					<group>
+					<field name="name"/>
+					<field name="state"/>
+					<field name="expiration_id"/>
+					<field name="presentation_date"/>
+					<field name="priority"/>
+					<field name="res_partner_id"/>
+					<field name="document_name_id"/>
+					<field name="file_binary" filename="file_name" />
+					<field name="file_name" class="oe_inline oe_right" invisible="1" />
+					<field name="document_set_id"/>
+					<field name="document_id"/>
+					<field name="requirement_id"/>
+					<field name="nota"/>
+					</group>
+					</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
 
 	</data>
 </openerp>

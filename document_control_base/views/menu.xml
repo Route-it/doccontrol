@@ -15,9 +15,15 @@
 			<field name="view_mode">tree,form</field>
 		</record>
 		<record model="ir.actions.act_window"
-			id="document_control_base.action_window_document_requirement">
-			<field name="name">Requerimientos</field>
-			<field name="res_model">document_control_base.requirement</field>
+			id="document_control_base.action_window_group_requirement">
+			<field name="name">Grupo de Requerimientos</field>
+			<field name="res_model">document_control_base.group_requirement</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<record model="ir.actions.act_window"
+			id="document_control_base.action_window_group_req_req_rel">
+			<field name="name">Configuracion de requerimiento para grupo</field>
+			<field name="res_model">document_control_base.group_req_requirement_rel</field>
 			<field name="view_mode">tree,form</field>
 		</record>
 		<!-- -->
@@ -38,8 +44,10 @@
 		<!-- lista de Grupos de control -->	
 		<menuitem name="Grupos de control" id="document_control_base.documents_group_list"
 			parent="document_control_base.category_documents_control" action="document_control_base.action_window_document_set" />
-		<menuitem name="Requerimientos" id="document_control_base.documents_requirement"
-			parent="document_control_base.category_documents_control" action="document_control_base.action_window_document_requirement" />
+		<menuitem name="Grupo de Requerimientos" id="document_control_base.group_requirement"
+			parent="document_control_base.category_documents_control" action="document_control_base.action_window_group_requirement" />
+		<menuitem name="Conf. de Reqs P/ Grupo" id="document_control_base._group_req_req_rel"
+			parent="document_control_base.category_documents_control" action="document_control_base.action_window_group_req_req_rel" />
 			
 			
 		<!-- CONTROL VENCIMIENTOS Y CALENDARIO -->

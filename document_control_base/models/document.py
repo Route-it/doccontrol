@@ -61,7 +61,7 @@ class document(models.Model):
         filename = self.file_name or ''
         
         state =''
-        for i in (0,1,2):
+        for i in range(0,len(self.STATE_SELECTION)):
             if self.state == self.STATE_SELECTION[i][0]:
                 state = self.STATE_SELECTION[i][1] 
         
