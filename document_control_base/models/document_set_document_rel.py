@@ -64,9 +64,9 @@ class document_set_document_rel(models.Model):
             if self.state == self.STATE_SELECTION[i][0]:
                 state = self.STATE_SELECTION[i][1] 
         
-        state = state or ''
+        state = ' - ('+state+')' if not self.document_id else ''
         resid = self.res_partner_id.name if self.res_partner_id else ''
-        self.name = resid.title()  + ' - ' + document_name.title() + ' - ('+state+')'  
+        self.name = resid.title()  + ' - ' + document_name.title()  + state  
 
 
     @api.one

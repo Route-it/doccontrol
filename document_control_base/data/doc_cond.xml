@@ -2,10 +2,10 @@
 <openerp>
     <data noupdate="1">
         
-        <record model="document_control_base.document_condition" id="doc_cond1">
-            <field name="name">Cobertura hasta 4 millones</field>
-            <field name="description"></field>
-        </record>
+<!--         <record model="document_control_base.document_condition" id="doc_cond1"> -->
+<!--             <field name="name">Cobertura hasta 4 millones</field> -->
+<!--             <field name="description"></field> -->
+<!--         </record> -->
 
     </data>
 </openerp>

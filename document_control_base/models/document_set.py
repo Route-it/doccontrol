@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from openerp import models, fields, api
-from types import InstanceType
 
 
 class document_set(models.Model):
@@ -14,45 +13,49 @@ class document_set(models.Model):
     group_requirement_id = fields.Many2one("document_control_base.group_requirement", "Grupo de Requerimientos")
     
     partner_ids = fields.Many2many("res.partner","document_set_partner_rel", "document_set_id", "partner_id", "Recursos Involucrados")
-    #document_set_id = fields.Many2many("document_control_base.document","document_set_document_rel_old","document_set_id", "document_id", "Documentos",readonly=True)
+
     document_set_document_rel_ids = fields.One2many("document_control_base.document_set_document_rel", "document_set_id", 
                                                     "Documentos",readonly=True,ondelete='cascade')
 
     control_date = fields.Many2one("calendar.event",string="Fecha de control")
     
-    
-    #@api.onchange('partner_ids')
-    #def onchange_partners(self):
-    #    print 'onchange_partners'
-        #llamar a onchange_group_requirement
-    #    return self.onchange_group_requirement()
-
-
+    """
     def get_d_set_d_rel(self,req_id,partner):
         for x in self.document_set_document_rel_ids:
             if (x.res_partner_id.id == partner) & (x.requirement_id.id == req_id):
                 return x
+    """
+
+    def get_documents_to_present(self):
+        #retorna la lista de documentos a presentar (para firmar por el cliente)
+        return
 
 
+    def get_resources(self):
+        return self.partner_ids
 
 
-
+    
     @api.one
-    #@api.onchange('group_requirement_ids','partner_ids')
     def compute_document_set_document_rel(self):
-    #def onchange_group_requirement(self):
         print 'onchange_group_requirement'
         res = []
         d_set_d_rel_obj = self.env['document_control_base.document_set_document_rel']
         g_req_req_rel_obj = self.env['document_control_base.group_req_requirement_rel']
 
+        resources = self.get_resources()
         #por cada requerimiento
         for req_id in self.group_requirement_id.requirement_ids:
             #por cada partner
-            if self.partner_ids:
-                for partner in self.partner_ids:
-                    #busco si existe el registro para el requerimiento & partner
-                    d_set_d_rel_exist = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id),('res_partner_id','=',partner.id)])
+            
+            if len(resources)>0:
+                for resource in resources:
+                    #busco si existe el registro para el requerimiento & resource
+                    
+                    property_name = resource._name.replace(".","_")+"_id"
+                    
+                    d_set_d_rel_exist = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id),(property_name,'=',resource.id)])
+                    #d_set_d_rel_exist = self.search_d_set_d_rel_with_res([('document_set_id','=',self.id),('requirement_id','=', req_id.id)],resource)
                     
                     # si hay mas de 1 registro que cumple (no deberia darse el caso), borro el resto que esta de mas. (con 1 alcanza)
                     if len(d_set_d_rel_exist)>1:
@@ -61,18 +64,21 @@ class document_set(models.Model):
                             super(document_set, self).write({'document_set_document_rel_ids':[(2, d_set_d_rel_exist[x].id, False)]})
                         d_set_d_rel_exist = d_set_d_rel_exist[0]
                     
-                    #si el partner, reune las condiciones del requerimiento,  
-                    # o, el partner cumple con todas las condiciones
-                    if len(partner.resource_condition_ids - req_id.condition_res_ids) == 0:
+                    #si el resource, reune las condiciones del requerimiento,  
+                    # o, el resource cumple con todas las condiciones
+                    #if len(resource.resource_condition_ids - req_id.condition_res_ids) == 0:
+                    if (req_id.condition_res_ids <= resource.resource_condition_ids):
                         doc_added = False
-                        defaults = {'res_partner_id':partner.id,'requirement_id':req_id.id,'document_name_id':req_id.document_name_id.id}
-                        defaults.update({'document_set_id':self.id})  
+                        defaults = {property_name:resource.id,'requirement_id':req_id.id,'document_name_id':req_id.document_name_id.id}
+                        defaults.update({'document_set_id':self.id})
+                        #defaults = self.add_resource_id(defaults, resource)
+                          
                         req_with_properties_id = g_req_req_rel_obj.search([('id','=',req_id.id)])
                         priority = str(req_with_properties_id.priority) if req_with_properties_id.priority else False
                         defaults.update({'priority':priority})  
-                        if len(partner.document_ids)>0:
-                            for doc in partner.document_ids:
-                                #busco el documento del partner que cumpla con las condiciones
+                        if len(resource.document_ids)>0:
+                            for doc in resource.document_ids:
+                                #busco el documento del resource que cumpla con las condiciones
                                 #'document_set_id':self.id,
                                 if (doc.document_name_id == req_id.document_name_id): 
                                     if (len(doc.document_condition_ids - req_id.condition_doc_ids)==0):
@@ -91,9 +97,6 @@ class document_set(models.Model):
                                         if not d_set_d_rel_exist:
                                             #computed_ids.append(target.id)
                                             super(document_set, self).write({'document_set_document_rel_ids':[(0, 0, defaults)]})
-                                            target =  d_set_d_rel_obj.create(defaults)
-                                            res.append(target)
-                                            #if not isinstance(self.id, models.NewId):
                                             print 'create d_set_d_rel' + str(d_set_d_rel_exist)
                                         else:
                                             #update
@@ -114,8 +117,8 @@ class document_set(models.Model):
                                         #No es el documento en cuestion, se ignora
                                         print 'No es el documento en cuestion, se ignora'
                         else:
-                            #el partner no tiene documentos.
-                            print 'el partner no tiene documentos.'
+                            #el resource no tiene documentos.
+                            print 'el resource no tiene documentos.'
                             doc_added = True                        
                             if not d_set_d_rel_exist:
                                 print 'create missing.'
@@ -135,16 +138,29 @@ class document_set(models.Model):
                             
                     else:
                         #self.document_set_document_rel_ids |=  self.env['document_control_base.document_set_document_rel'].create(defaults)
-                        print "el partner no reune las condiciones."
+                        print "el resource no reune las condiciones."
                         if d_set_d_rel_exist:
-                            print "borrar entrada de partner que no aplica."
+                            print "borrar entrada de resource que no aplica."
                             super(document_set, self).write({'document_set_document_rel_ids':[(2, d_set_d_rel_exist.id, False)]})
                 
-                #eliminar los dsdr que tengan partners que no esten en partner_ids
-                print "Eliminar docs de partners que no estan en lista"
-                partner_ids = [x.id for x in self.partner_ids]
-                d_set_d_rel_exist = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id),('res_partner_id','not in',partner_ids)])
-                for x in d_set_d_rel_exist:
+                #eliminar los dsdr que tengan resources que no esten en resource_ids
+                print "Eliminar docs de resources que no estan en lista"
+                resource_ids = [(x._name,x.id) for x in resources]
+                
+                result_dict = {}
+                for x in resource_ids:
+                    if x[0] not in result_dict:
+                        result_dict[x[0]] = []
+                    result_dict[x[0]].append(x[1])
+                
+                d_set_d_rel_exist_ni = []
+                for x in result_dict.keys():
+                        property_name = x.replace(".","_")+"_id"
+                        d_set_d_rel_exist_ni +=  d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id),(property_name,'not in',result_dict.get(x))])
+                        #d_set_d_rel_exist_ni |=  d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id),('res_partner_id','not in',resource_ids)])
+                #d_set_d_rel_exist_in = self.search_d_set_d_rel_not_in_res([('document_set_id','=',self.id),('requirement_id','=', req_id.id)],resource_ids)
+
+                for x in d_set_d_rel_exist_ni:
                     super(document_set, self).write({'document_set_document_rel_ids':[(2, x.id, False)]})
                 
             else:
@@ -154,10 +170,6 @@ class document_set(models.Model):
                 for x in self.document_set_document_rel_ids:
                     super(document_set, self).write({'document_set_document_rel_ids':[(2, x.id, False)]})
 
-        #res = []
-        #res.append({'document_set_document_rel_ids':[x.id for x in self.document_set_document_rel_ids]})
-                   
-#                    'tax_ids': [(6, 0, done_taxes)] if tax_line.tax_id.include_base_amount else []
         return res
 
                             

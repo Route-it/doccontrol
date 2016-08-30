@@ -57,12 +57,33 @@
 
 			</field>
 		</record>
+		
+<!-- 		<record model="ir.actions.act_url" id="document_control_base.action_get_zip_documents"> -->
+<!-- 			<field name="name">Zip de Documentos</field> -->
+<!-- 			<field name="url">/web/document_control_base/getzip</field> -->
+<!-- 			<field name="target">self</field> -->
+<!-- 		</record> -->
+		
+		<record model="ir.actions.server" id="document_control_base.server_action_get_zip_documents">
+			<field name="name">Zip de Documentos Server Action</field>
+            <field name="model_id" ref="model_document_control_base_document_set"></field>		
+			<field name="code">
+			action = {
+                "type": "ir.actions.act_url",
+                "url": "/web/document_control_base/getzip?id="+str(object.id),
+                "targer": "self"
+            }
+			</field>
+		</record>
+		
+		
 		<record id="document_control_base.document_set_form" model="ir.ui.view">
 			<field name="model">document_control_base.document_set</field>
 			<field name="arch" type="xml">
 				<form string="Documentos">
 					<header>
 	                    <button name="compute_document_set_document_rel" string="Computar Documentos" type="object" class="oe_highlight" groups="base.group_user"/>
+	                    <button name="document_control_base.server_action_get_zip_documents" string="Obtener zip de Documentos" type="action" class="oe_highlight" groups="base.group_user"/>
 <!-- 	                    <field name="state" widget="statusbar"  statusbar_visible="presupuestar,posible,arrancar,terminar,cobrar,cerrado" statusbar_colors='{"presupuestar":"blue"}' readonly="1"/> -->
 	                </header>
 					

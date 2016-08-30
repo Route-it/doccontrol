@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        <record model="calendar.alarm" id="alarm_1">
+            <field name="name">1 Hour(s) Whats App</field>
+            <field name="duration" eval="1" />
+            <field name="interval">hours</field>
+            <field name="type">whatsapp</field>            
+        </record>   
+    </data>
+</openerp>
