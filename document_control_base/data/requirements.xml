@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        
+        <!-- para empresas -->
+        
+        <record model="document_control_base.requirement" id="req">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+            
+        </record>
+        <record model="document_control_base.requirement" id="req1">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name1"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req2">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name2"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req3">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name3"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req4">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name4"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req5">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name5"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req6">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name6"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req7">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name7"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req8">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name8"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req9">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name9"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req10">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name10"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req11">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name11"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req12">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name12"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req13">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name13"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req14">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name14"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req15">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name15"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req16">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name16"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req17">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name17"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req18">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name18"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req19">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name19"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond1'),))]"/>
+        </record>
+        
+        <!-- para empleados externos -->
+        
+        <record model="document_control_base.requirement" id="req20">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name20"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond2'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req21">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name21"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond2'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req22">
+            <field name="resource_type">res.partner</field>
+            <field name="document_name_id" ref="doc_name22"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_base.res_cond3'),))]"/>
+        </record>
+        
+    </data>
+</openerp>

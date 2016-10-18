@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        
+        
+		<!-- Vehiculos -->
+
+
+        <record model="document_control_base.document_name" id="doc_name40">
+            <field name="name">Antigüedad</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name41">
+            <field name="name">Verificación de Tacógrafos</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name42">
+            <field name="name">Póliza de Seguro Automotor</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name43">
+            <field name="name">Desinfección Municipal Mensual</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name44">
+            <field name="name">Factura de compra / Título de propiedad / Contrato de Alquiler</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name45">
+            <field name="name">Habilitación para trasporte de cargas Generales/Peligrosas</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name46">
+            <field name="name">Registro único de transporte automotor</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name47">
+            <field name="name">Revisión técnica accesorio</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name48">
+            <field name="name">Revisión técnica Vehicular</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name49">
+            <field name="name">Pago de Seguro Automotor</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name50">
+            <field name="name">Pago de Seguro de accesorio</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name51">
+            <field name="name">Póliza de Seguro del accesorio</field>
+            <field name="res_type">fleet.vehicle</field>
+        </record>
+
+    </data>
+</openerp>

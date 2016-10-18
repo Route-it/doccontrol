@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        
+        
+        <!-- Para empleados -->
+        
+        <record model="document_control_base.document_name" id="doc_name20">
+            <field name="name">Carnet de operador de Grúas</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name21">
+            <field name="name">Carnet Sanitario municipal</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name22">
+            <field name="name">Clasificación Recurso</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name23">
+            <field name="name">Curso de manejo Defensivo</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name24">
+            <field name="name">Curso de Primeros Auxilios / RCP</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name25">
+            <field name="name">Licencia o Carnet de Conducir</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name26">
+            <field name="name">Licencia Nacional Habilitante CNRT</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name29">
+            <field name="name">Primas de Seguro de atencedentes personales</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name30">
+            <field name="name">Póliza de Seguro de antecedentes personales</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name31">
+            <field name="name">Afectación Total</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name32">
+            <field name="name">Examen médico / Certificado de Aptitud</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name33">
+            <field name="name">Bajas por Rotación</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name34">
+            <field name="name">Figura en Nómina de ART</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name35">
+            <field name="name">Figura en Nómina de SVO y Anexo 931</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name36">
+            <field name="name">Formulario Alta AFIP</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name37">
+            <field name="name">Elementos de Protección Personal</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name38">
+            <field name="name">Situación Previsional</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        <record model="document_control_base.document_name" id="doc_name39">
+            <field name="name">Vacuna Antitetánica</field>
+            <field name="res_type">hr.employee</field>
+        </record>
+        
+    </data>
+</openerp>

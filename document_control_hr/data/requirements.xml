@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        
+        <!-- para empresas -->
+        
+        <record model="document_control_base.requirement" id="req20">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name20"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond3'),ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req21">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name21"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req22">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name22"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req23">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name23"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond4'),ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req231">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name23"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond5'),ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req24">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name24"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+            
+        </record>
+        <record model="document_control_base.requirement" id="req25">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name25"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),ref('document_control_hr.res_cond4'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req251">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name25"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),ref('document_control_hr.res_cond5'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req26">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name26"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),ref('document_control_hr.res_cond5'),))]"/>
+        </record>
+<!--         <record model="document_control_base.requirement" id="req27"> -->
+<!--             <field name="resource_type">hr.employee</field> -->
+<!--             <field name="document_name_id" ref="doc_name27"></field> -->
+<!--             <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/> -->
+<!--         </record> -->
+        <record model="document_control_base.requirement" id="req29">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name29"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req30">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name30"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req31">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name31"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req32">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name32"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req33">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name33"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req34">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name34"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req35">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name35"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req36">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name36"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req37">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name37"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req38">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name38"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        <record model="document_control_base.requirement" id="req39">
+            <field name="resource_type">hr.employee</field>
+            <field name="document_name_id" ref="doc_name39"></field>
+            <field name="condition_res_ids" eval="[(6,0, (ref('document_control_hr.res_cond1'),ref('document_control_hr.res_cond6'),))]"/>
+        </record>
+        
+    </data>
+</openerp>

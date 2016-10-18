@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        
+<!--        <record model="document_control_base.resource_condition" id="res_cond1">
+            <field name="name">En convenio</field>
+            <field name="description"></field>
+        </record> -->
+    </data>
+</openerp>

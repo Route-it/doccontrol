@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        
+        <!-- para empresas -->
+        
+        <record model="document_control_base.requirement" id="req40">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name40"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req41">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name41"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req42">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name42"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req43">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name43"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req44">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name44"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req45">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name45"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req46">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name46"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req47">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name47"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req48">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name48"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req49">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name49"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req50">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name50"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req31">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name41"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req32">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name42"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req33">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name43"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req34">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name44"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req35">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name45"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req36">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name46"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req37">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name47"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req38">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name48"></field>
+        </record>
+        <record model="document_control_base.requirement" id="req39">
+            <field name="resource_type">fleet.vehicle</field>
+            <field name="document_name_id" ref="doc_name49"></field>
+        </record>
+        
+    </data>
+</openerp>
