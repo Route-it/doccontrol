@@ -1,35 +1,38 @@
 <?xml version="1.0"?>
 <openerp>
     <data noupdate="1">
+
+		<!-- para empresas -->
         
         <record model="document_control_base.resource_condition" id="res_cond1">
             <field name="name">Empresa Contratista</field>
             <field name="description">Empresa que toma contratos con el cliente</field>
+            <field name="res_type">res.partner</field>
         </record>
+
+		<!-- para empleados externos -->
+
         <record model="document_control_base.resource_condition" id="res_cond2">
             <field name="name">Autónomo / Monotributista</field>
             <field name="description">Personal Autonomo / Monotributista</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.resource_condition" id="res_cond3">
             <field name="name">Conductor común</field>
-            <field name="description"></field>
-        </record>
-        <record model="document_control_base.resource_condition" id="res_cond4">
-            <field name="name">En Convenio de trabajo</field>
+            <field name="res_type">res.partner</field>
             <field name="description"></field>
         </record>
         <record model="document_control_base.resource_condition" id="res_cond5">
             <field name="name">Conductor con licencia profesional</field>
             <field name="description"></field>
-        </record>
-        <record model="document_control_base.resource_condition" id="res_cond6">
-            <field name="name">Empleado en Relacion de dependencia</field>
-            <field name="description"></field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.resource_condition" id="res_cond8">
             <field name="name">Recurso Externo</field>
             <field name="description"></field>
+            <field name="res_type">res.partner</field>
         </record>
+
         
     </data>
 </openerp>

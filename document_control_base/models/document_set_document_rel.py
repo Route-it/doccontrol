@@ -4,8 +4,16 @@ import datetime
 
 from openerp import models, fields, api
 
+
 class document_set_document_rel(models.Model):
     _name = 'document_control_base.document_set_document_rel'
+
+
+    @api.model
+    def _get_resources_list(self):
+        model_obj = self.env['document_control_base.resource_type'] 
+        return model_obj._get_resources_list() 
+
 
     PRIORITY_SELECTION = [('low', 'Baja'),
                                    ('normal', 'Normal'),
@@ -24,7 +32,7 @@ class document_set_document_rel(models.Model):
 
     document_set_id = fields.Many2one("document_control_base.document_set","Grupo de control",readonly=True)
      
-    name = fields.Char("Nombre",compute='_compute_name',readonly=True)
+    name = fields.Char("Nombre",compute='_compute_name',readonly=True,store=True)
     
     document_name_id =  fields.Many2one("document_control_base.document_name","Nombre del Documento",readonly=True)
 
@@ -38,6 +46,10 @@ class document_set_document_rel(models.Model):
     file_name = fields.Char(related="document_id.file_name",readonly=True)
 
     res_partner_id = fields.Many2one("res.partner",string="Empresa/Recurso Externo",readonly=True)
+    res_type = fields.Selection('_get_resources_list',default='res.partner',
+                                  string='Estado', required=True)
+
+
 
     requirement_id = fields.Many2one("document_control_base.requirement",string="Requerimiento", readonly=True)
 
@@ -65,7 +77,9 @@ class document_set_document_rel(models.Model):
                 state = self.STATE_SELECTION[i][1] 
         
         state = ' - ('+state+')' if not self.document_id else ''
+        state =''
         resid = self.res_partner_id.name if self.res_partner_id else ''
+        resid = resid if not self.document_id else ''
         self.name = resid.title()  + ' - ' + document_name.title()  + state  
 
 

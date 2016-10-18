@@ -1,3 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from . import models
+from . import document
+from . import document_set
+from . import document_set_document_rel
+from . import fleet_vehicle
+from . import resource_type
+from . import expiration

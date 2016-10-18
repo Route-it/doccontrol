@@ -36,12 +36,16 @@ class documentszip(http.Controller):
                     extension = file_name_array[len(file_name_array)-1]
                     
                     name =  doc.document_id.name.split(' - ')
-                    name = name[0] + ' ' + name[1] + '.' + extension
+                    #name[2] contiene el nombre original del archivo. Se lo limpiamos
+                    name = name[0] + ' - ' + name[1] + '.' + extension
 
                 datas = document.datas.decode('base64') if document else "documento faltante"
-
-                if not name: name = doc.res_partner_id.name + ' ' + doc.document_name_id.name +' (' + doc.state + ').txt'
                 
+                property_name = doc.res_type.replace(".","_")+"_id"
+                #eval(code="print('Hello, %s'%name)", globals={}, locals={'name':'person-b'})
+                if not name: name =  eval("doc."+property_name+".name") + ' - ' + doc.document_name_id.name +' (' + doc.state + ').txt'
+                #if not name: name =  doc.res_partner_id.name + ' ' + doc.document_name_id.name +' (' + doc.state + ').txt'
+                name = name.replace('/',' ').replace('\\',' ')
 
                 zf.writestr(name, datas, compression)
                 

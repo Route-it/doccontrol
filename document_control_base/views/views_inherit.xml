@@ -19,13 +19,13 @@
 			<field name="inherit_id" ref="base.view_partner_form" />
 			<field name="arch" type="xml">
 
-				<notebook position="before">
-					<label for="resource_condition_ids"/>
-		            <field name="resource_condition_ids" widget="many2many_tags"/>
-				</notebook>
 				<notebook position="inside">
                     	<page string="Documentos">
-                            <field name="document_ids" />
+							<label for="resource_condition_ids"/>
+				            <field name="resource_condition_ids" widget="many2many_tags" domain="[('res_type','=','res.partner')]"/>
+                        
+							<label for="document_ids"/>
+                            <field name="document_ids" context="{'default_res_type':'res.partner','default_res_partner_id':id}"/>
                         </page>
 				</notebook>
 

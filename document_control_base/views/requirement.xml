@@ -22,11 +22,17 @@
 						</h1>
 						<group>
 							<group>
-								<field name="description" />
-								<field name="document_name_id"/>
-								<field name="condition_doc_ids" widget="many2many_tags"/>
 								<field name="resource_type"/>								
+								<field name="document_name_id"/>
+							</group>
+							<group>
 								<field name="condition_res_ids" widget="many2many_tags"/>
+								<field name="condition_doc_ids" widget="many2many_tags"/>
+							</group>
+						</group>
+						<group>
+							<group>
+						<field name="description" />
 							</group>
 						</group>
 					</sheet>
@@ -56,9 +62,9 @@
 						<group>
 							<group>
 								<field name="res_partner_id"/>
-								<field name="expiration_date" />
+								<field name="expiration_date" invisible="1"/>
 								<field name="instance"/>
-								<field name="requirement_ids" widget="many2many_tags"/>
+								<field name="requirement_ids" widget="one2many_list" context="{'default_group_requirement_id':id,'readonly_group_requirement_id':True}"/>
 							</group>
 						</group>
 					</sheet>

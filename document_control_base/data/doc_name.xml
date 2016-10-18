@@ -6,171 +6,104 @@
         
         <record model="document_control_base.document_name" id="doc_name">
             <field name="name">Informe de avance del plan anual de Capacitacion en Seguridad</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name1">
             <field name="name">Carta de compromiso de inspecciones</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name2">
             <field name="name">Contribución Sindical</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name3">
-            <field name="name">Informde de Seguridad</field>
+            <field name="name">Informe de Seguridad</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name4">
             <field name="name">Contrato de Afiliacion ART</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name5">
             <field name="name">Póliza de Seguro de Vida obligatorio</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name6">
             <field name="name">Pago de Seguro de Vida obligatorio</field>
+            <field name="res_type">res.partner</field>
         </record>
 
         <record model="document_control_base.document_name" id="doc_name7">
             <field name="name">Acreditación Bancaria</field>
+            <field name="res_type">res.partner</field>
         </record>
 
         <record model="document_control_base.document_name" id="doc_name8">
             <field name="name">Fecha de Habilitación del Período</field>
+            <field name="res_type">res.partner</field>
         </record>
 
         <record model="document_control_base.document_name" id="doc_name9">
             <field name="name">Habilitación de empresa sub contratista</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name10">
             <field name="name">Horas (HS) hombre y KM recorridos por vehículo</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name11">
             <field name="name">Horas (HS) mensuales del Responsable SAS en yacimiento</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name12">
             <field name="name">Seguro de accidentes personales</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name13">
             <field name="name">Seguro automotor</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name14">
             <field name="name">Libro de sueldos y jornales</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name15">
             <field name="name">Plan anual de capacitación</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name16">
             <field name="name">Recibos de sueldo y otras remuneraciones</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name17">
             <field name="name">Pago de Seguro de Responsabilidad Civil Comprensiva</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name18">
             <field name="name">Póliza de Seguro de Responsabilidad Civil Comprensiva</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name19">
             <field name="name">Régimen nacional de SS y OS y ART</field>
+            <field name="res_type">res.partner</field>
         </record>
-        
-        
-        <!-- Para empleados -->
-        
+
+
+		<!-- para empleados externos -->
+
         <record model="document_control_base.document_name" id="doc_name20">
-            <field name="name">Carnet de operador de Grúas</field>
+            <field name="name">Constancia de CUIT</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name21">
-            <field name="name">Carnet Sanitario municipal</field>
+            <field name="name">Pago Autónomo / Monotributo</field>
+            <field name="res_type">res.partner</field>
         </record>
         <record model="document_control_base.document_name" id="doc_name22">
-            <field name="name">Clasificación Recurso</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name23">
-            <field name="name">Curso de manejo Defensivo</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name24">
-            <field name="name">Curso de Primeros Auxilios / RCP</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name25">
             <field name="name">Licencia o Carnet de Conducir</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name26">
-            <field name="name">Licencia Nacional Habilitante CNRT</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name27">
-            <field name="name">Constancia de CUIT</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name28">
-            <field name="name">Pago Autónomo / Monotributo</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name29">
-            <field name="name">Primas de Seguro de atencedentes personales</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name30">
-            <field name="name">Póliza de Seguro de antecedentes personales</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name31">
-            <field name="name">Afectación Total</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name32">
-            <field name="name">Examen médico / Certificado de Aptitud</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name33">
-            <field name="name">Bajas por Rotación</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name34">
-            <field name="name">Figura en Nómina de ART</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name35">
-            <field name="name">Figura en Nómina de SVO y Anexo 931</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name36">
-            <field name="name">Formulario Alta AFIP</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name37">
-            <field name="name">Elementos de Protección Personal</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name38">
-            <field name="name">Situación Previsional</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name39">
-            <field name="name">Vacuna Antitetánica</field>
+            <field name="res_type">res.partner</field>
         </record>
 
-		<!-- Vehiculos -->
-
-
-        <record model="document_control_base.document_name" id="doc_name40">
-            <field name="name">Antigüedad</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name41">
-            <field name="name">Verificación de Tacógrafos</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name42">
-            <field name="name">Póliza de Seguro Automotor</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name43">
-            <field name="name">Desinfección Municipal Mensual</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name44">
-            <field name="name">Factura de compra / Título de propiedad / Contrato de Alquiler</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name45">
-            <field name="name">Habilitación para trasporte de cargas Generales/Peligrosas</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name46">
-            <field name="name">Registro único de transporte automotor</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name47">
-            <field name="name">Revisión técnica accesorio</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name48">
-            <field name="name">Revisión técnica Vehicular</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name49">
-            <field name="name">Pago de Seguro Automotor</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name50">
-            <field name="name">Pago de Seguro de accesorio</field>
-        </record>
-        <record model="document_control_base.document_name" id="doc_name51">
-            <field name="name">Póliza de Seguro del accesorio</field>
-        </record>
         
     </data>
 </openerp>

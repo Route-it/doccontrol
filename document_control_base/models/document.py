@@ -2,43 +2,36 @@
 
 import datetime
 
+from lxml import etree
+from openerp.osv.orm import setup_modifiers
 
 from openerp import models, fields, api
-from FixTk import ver
-
-"""
-def _models_get(self):
-    model_obj = self.env['ir.model'] 
-    model_list = model_obj.search([('model', 'in', ('res.partner', 'fleet.vehicle', 'hr.employee'))])
-    
-    return [(model.model, model.name) for model in model_list]
-def _models_get(self):
-    model_obj = resource_type._get_resources_list(self)#.self.env['document_control_base.resource_type'] 
-    model_list = model_obj.search([]) or []
-    return [(model.model_name, model.name) for model in model_list]
-"""
-def _get_resources_list(self):
-    model_obj = self.env['document_control_base.resource_type'] 
-    return model_obj._get_resources_list() 
-    #return [(model.model, model.name) for model in model_list]
 
 
 
 class document(models.Model):
     _name = 'document_control_base.document'
+    
+    @api.model
+    def _get_resources_list(self):
+        model_obj = self.env['document_control_base.resource_type'] 
+        return model_obj._get_resources_list() 
 
     STATE_SELECTION = [('active', 'Vigente'),
                                    ('to_expire', 'Proximo a vencer'),
                                    ('expired', 'Vencido')]
      
      
-    name = fields.Char("Nombre",readonly=True,compute='_compute_name')
+    name = fields.Char("Nombre",readonly=True,store=True,compute='_compute_name')
     
     document_name_id =  fields.Many2one("document_control_base.document_name","Nombre del documento")
      
     document_condition_ids = fields.Many2many("document_control_base.document_condition", "document_condition_rel", "document_id", "condition_id", "Condiciones del documento")
 
     res_partner_id = fields.Many2one("res.partner",string="Empresa/Recurso Externo")
+    res_type = fields.Selection('_get_resources_list',default='res.partner',
+                                  string='Tipo de Recurso', required=True)
+
 
     no_expiration = fields.Boolean("Sin vencimiento")
 
@@ -54,6 +47,22 @@ class document(models.Model):
     
     description = fields.Text('Descripcion')
 
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+        res = super(document, self).fields_view_get(
+            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
+        if bool(self._context.get('default_res_type')) & bool(view_type == 'form'): 
+            doc = etree.XML(res['arch'])
+            node = doc.xpath("//field[@name='res_type']")[0]
+            node.set('readonly', '1')
+            setup_modifiers(node, res['fields']['res_type'])
+        
+            res['arch'] = etree.tostring(doc)
+
+        return res                         
+    
+
     @api.one
     @api.depends('file_name','res_partner_id','document_name_id','state')
     def _compute_name(self):
@@ -66,7 +75,7 @@ class document(models.Model):
                 state = self.STATE_SELECTION[i][1] 
         
         state = state or ''
-        resid = self.res_partner_id.name if self.res_partner_id else ''
+        resid = self.res_partner_id.name if self.res_partner_id.name else ''
         self.name = resid.title()  + ' - ' + document_name.title() + ' - /' + filename +'/ - ('+state+')'  
 
 

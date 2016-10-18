@@ -44,125 +44,143 @@ class document_set(models.Model):
         g_req_req_rel_obj = self.env['document_control_base.group_req_requirement_rel']
 
         resources = self.get_resources()
+        
+        requirement_ids = [x.id for x in self.group_requirement_id.requirement_ids]
+
+        #eliminar los dsdr que no sean requerimientos (no estan en requirement_ids
+        d_set_d_rel_to_delete = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','not in', requirement_ids)])
+        for x in d_set_d_rel_to_delete:
+            super(document_set, self).write({'document_set_document_rel_ids':[(2, x.id, False)]})
+
+        #eliminar los dsdr que tengan resources que no esten en resource_ids
+        print "Eliminar docs de resources que no estan en lista"
+        resource_ids = [(x._name,x.id) for x in resources]
+        
+        result_dict = {}
+        for x in resource_ids:
+            if x[0] not in result_dict:
+                result_dict[x[0]] = []
+            result_dict[x[0]].append(x[1])
+
+        
+        d_set_d_rel_exist_ni = []
+        for x in result_dict.keys():
+                property_name = x.replace(".","_")+"_id"
+                d_set_d_rel_exist_ni +=  d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','in', requirement_ids),(property_name,'not in',result_dict.get(x))])
+                #d_set_d_rel_exist_ni +=  d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', group_req_req_rel.requirement_id.id),(property_name,'not in',result_dict.get(x))])
+
+        for x in d_set_d_rel_exist_ni:
+            super(document_set, self).write({'document_set_document_rel_ids':[(2, x.id, False)]})
+
+
         #por cada requerimiento
         for req_id in self.group_requirement_id.requirement_ids:
-            #por cada partner
+            group_req_req_rel = g_req_req_rel_obj.search([('requirement_id','=',req_id.id),('group_requirement_id','=',self.group_requirement_id.id)])
             
+            #por cada partner
             if len(resources)>0:
                 for resource in resources:
-                    #busco si existe el registro para el requerimiento & resource
-                    
-                    property_name = resource._name.replace(".","_")+"_id"
-                    
-                    d_set_d_rel_exist = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id),(property_name,'=',resource.id)])
-                    #d_set_d_rel_exist = self.search_d_set_d_rel_with_res([('document_set_id','=',self.id),('requirement_id','=', req_id.id)],resource)
-                    
-                    # si hay mas de 1 registro que cumple (no deberia darse el caso), borro el resto que esta de mas. (con 1 alcanza)
-                    if len(d_set_d_rel_exist)>1:
-                        size = len(d_set_d_rel_exist)
-                        for x in range(1,size):
-                            super(document_set, self).write({'document_set_document_rel_ids':[(2, d_set_d_rel_exist[x].id, False)]})
-                        d_set_d_rel_exist = d_set_d_rel_exist[0]
-                    
-                    #si el resource, reune las condiciones del requerimiento,  
-                    # o, el resource cumple con todas las condiciones
-                    #if len(resource.resource_condition_ids - req_id.condition_res_ids) == 0:
-                    if (req_id.condition_res_ids <= resource.resource_condition_ids):
-                        doc_added = False
-                        defaults = {property_name:resource.id,'requirement_id':req_id.id,'document_name_id':req_id.document_name_id.id}
-                        defaults.update({'document_set_id':self.id})
-                        #defaults = self.add_resource_id(defaults, resource)
-                          
-                        req_with_properties_id = g_req_req_rel_obj.search([('id','=',req_id.id)])
-                        priority = str(req_with_properties_id.priority) if req_with_properties_id.priority else False
-                        defaults.update({'priority':priority})  
-                        if len(resource.document_ids)>0:
-                            for doc in resource.document_ids:
-                                #busco el documento del resource que cumpla con las condiciones
-                                #'document_set_id':self.id,
-                                if (doc.document_name_id == req_id.document_name_id): 
-                                    if (len(doc.document_condition_ids - req_id.condition_doc_ids)==0):
-                                        #Si existe el documento, y reune las condicioneslo agregamos a la lista. 
-                                        #crear un document_set_document_rel
-                                        defaults.update({'document_id':doc.id})
-                                        """
-                                        (0, 0,  { values })    link to a new record that needs to be created with the given values dictionary
-                                        (1, ID, { values })    update the linked record with id = ID (write *values* on it)
-                                        (2, ID)                remove and delete the linked record with id = ID (calls unlink on ID, that will delete the object completely, and the link to it as well)
-    
-                                        Example:
-                                           [(0, 0, {'field_name':field_value_record1, ...}), (0, 0, {'field_name':field_value_record2, ...})]
-                                        """
-                                        
-                                        if not d_set_d_rel_exist:
-                                            #computed_ids.append(target.id)
-                                            super(document_set, self).write({'document_set_document_rel_ids':[(0, 0, defaults)]})
-                                            print 'create d_set_d_rel' + str(d_set_d_rel_exist)
-                                        else:
-                                            #update
-                                            #self.document_set_document_rel_ids |=  self.env['document_control_base.document_set_document_rel'].create(defaults)
-                                            print 'update d_set_d_rel' + str(d_set_d_rel_exist[0])
-                                            super(document_set, self).write({'document_set_document_rel_ids':[(1, d_set_d_rel_exist.id, defaults)]})
-                                    else:
-                                        # encontre el documento pero no reune las condiciones
-                                        print 'encontre el documento pero no reune las condiciones'
-                                        if not d_set_d_rel_exist:
-                                            print 'create missing'
-                                            super(document_set, self).write({'document_set_document_rel_ids':[(0, 0, defaults)]})
-                                        else:
-                                            print 'update missing'
-                                            super(document_set, self).write({'document_set_document_rel_ids':[(1, d_set_d_rel_exist.id, defaults)]})
-                                    doc_added = True
-                                else:
-                                        #No es el documento en cuestion, se ignora
-                                        print 'No es el documento en cuestion, se ignora'
-                        else:
-                            #el resource no tiene documentos.
-                            print 'el resource no tiene documentos.'
-                            doc_added = True                        
-                            if not d_set_d_rel_exist:
-                                print 'create missing.'
-                                super(document_set, self).write({'document_set_document_rel_ids':[(0, 0, defaults)]})
-                            else:
-                                print 'update missing.'
-                                super(document_set, self).write({'document_set_document_rel_ids':[(1, d_set_d_rel_exist.id, defaults)]})
+                    if resource._name == req_id.resource_type:
+                        #busco si existe el registro para el requerimiento & resource
+                        property_name = resource._name.replace(".","_")+"_id"
                         
-                        #chequear si se updateo o creo un doc. Sino, agregar un missing
-                        if not (doc_added):
-                            if not d_set_d_rel_exist:
-                                print 'create missing'
-                                super(document_set, self).write({'document_set_document_rel_ids':[(0, 0, defaults)]})
-                            else:
-                                print 'update missing'
-                                super(document_set, self).write({'document_set_document_rel_ids':[(1, d_set_d_rel_exist.id, defaults)]})
-                            
-                    else:
-                        #self.document_set_document_rel_ids |=  self.env['document_control_base.document_set_document_rel'].create(defaults)
-                        print "el resource no reune las condiciones."
-                        if d_set_d_rel_exist:
-                            print "borrar entrada de resource que no aplica."
-                            super(document_set, self).write({'document_set_document_rel_ids':[(2, d_set_d_rel_exist.id, False)]})
-                
-                #eliminar los dsdr que tengan resources que no esten en resource_ids
-                print "Eliminar docs de resources que no estan en lista"
-                resource_ids = [(x._name,x.id) for x in resources]
-                
-                result_dict = {}
-                for x in resource_ids:
-                    if x[0] not in result_dict:
-                        result_dict[x[0]] = []
-                    result_dict[x[0]].append(x[1])
-                
-                d_set_d_rel_exist_ni = []
-                for x in result_dict.keys():
-                        property_name = x.replace(".","_")+"_id"
-                        d_set_d_rel_exist_ni +=  d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id),(property_name,'not in',result_dict.get(x))])
-                        #d_set_d_rel_exist_ni |=  d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id),('res_partner_id','not in',resource_ids)])
-                #d_set_d_rel_exist_in = self.search_d_set_d_rel_not_in_res([('document_set_id','=',self.id),('requirement_id','=', req_id.id)],resource_ids)
+                        d_set_d_rel_exist = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id),(property_name,'=',resource.id)])
+                        #d_set_d_rel_exist = self.search_d_set_d_rel_with_res([('document_set_id','=',self.id),('requirement_id','=', req_id.id)],resource)
+                        
+                        # si hay mas de 1 registro que cumple (no deberia darse el caso), borro el resto que esta de mas. (con 1 alcanza)
+                        if len(d_set_d_rel_exist)>1:
+                            size = len(d_set_d_rel_exist)
+                            for x in range(1,size):
+                                super(document_set, self).write({'document_set_document_rel_ids':[(2, d_set_d_rel_exist[x].id, False)]})
+                            d_set_d_rel_exist = d_set_d_rel_exist[0]
+                        
+                        #si el resource, reune las condiciones del requerimiento,  
+                        # o, el resource cumple con todas las condiciones
+                        #if len(resource.resource_condition_ids - req_id.condition_res_ids) == 0:
+                        defaults = {property_name:resource.id,'requirement_id':group_req_req_rel.requirement_id.id,'document_name_id':group_req_req_rel.requirement_id.document_name_id.id}
+                        defaults.update({'res_type':req_id.resource_type})  
 
-                for x in d_set_d_rel_exist_ni:
-                    super(document_set, self).write({'document_set_document_rel_ids':[(2, x.id, False)]})
-                
+                        if not bool(group_req_req_rel.priority):
+                            group_req_req_rel.priority = 'normal'
+                            group_req_req_rel._compute_name()
+                            
+                        priority = str(group_req_req_rel.priority) 
+                        defaults.update({'priority':priority})  
+                        #if (group_req_req_rel.requirement_id.condition_res_ids <= resource.resource_condition_ids):
+                        if (len(group_req_req_rel.requirement_id.condition_res_ids - resource.resource_condition_ids) == 0):
+                            doc_added = False
+                            defaults.update({'document_set_id':self.id})
+                            #defaults = self.add_resource_id(defaults, resource)
+                              
+                            if len(resource.document_ids)>0:
+                                for doc in resource.document_ids:
+                                    #busco el documento del resource que cumpla con las condiciones
+                                    #'document_set_id':self.id,
+                                    if (doc.document_name_id == group_req_req_rel.requirement_id.document_name_id): 
+                                        if (len(doc.document_condition_ids - group_req_req_rel.requirement_id.condition_doc_ids)==0):
+                                            #Si existe el documento, y reune las condicioneslo agregamos a la lista. 
+                                            #crear un document_set_document_rel
+                                            defaults.update({'document_id':doc.id})
+                                            """
+                                            (0, 0,  { values })    link to a new record that needs to be created with the given values dictionary
+                                            (1, ID, { values })    update the linked record with id = ID (write *values* on it)
+                                            (2, ID)                remove and delete the linked record with id = ID (calls unlink on ID, that will delete the object completely, and the link to it as well)
+        
+                                            Example:
+                                               [(0, 0, {'field_name':field_value_record1, ...}), (0, 0, {'field_name':field_value_record2, ...})]
+                                            """
+                                            
+                                            if not d_set_d_rel_exist:
+                                                #computed_ids.append(target.id)
+                                                super(document_set, self).write({'document_set_document_rel_ids':[(0, 0, defaults)]})
+                                                print 'create d_set_d_rel' + str(d_set_d_rel_exist)
+                                            else:
+                                                #update
+                                                #self.document_set_document_rel_ids |=  self.env['document_control_base.document_set_document_rel'].create(defaults)
+                                                print 'update d_set_d_rel' + str(d_set_d_rel_exist[0])
+                                                super(document_set, self).write({'document_set_document_rel_ids':[(1, d_set_d_rel_exist.id, defaults)]})
+                                        else:
+                                            # encontre el documento pero no reune las condiciones
+                                            print 'encontre el documento pero no reune las condiciones'
+                                            if not d_set_d_rel_exist:
+                                                print 'create missing'
+                                                super(document_set, self).write({'document_set_document_rel_ids':[(0, 0, defaults)]})
+                                            else:
+                                                print 'update missing'
+                                                super(document_set, self).write({'document_set_document_rel_ids':[(1, d_set_d_rel_exist.id, defaults)]})
+                                        doc_added = True
+                                    else:
+                                            #No es el documento en cuestion, se ignora
+                                            print 'No es el documento en cuestion, se ignora'
+                            else:
+                                #el resource no tiene documentos.
+                                print 'el resource no tiene documentos.'
+                                doc_added = True                        
+                                if not d_set_d_rel_exist:
+                                    print 'create missing.'
+                                    super(document_set, self).write({'document_set_document_rel_ids':[(0, 0, defaults)]})
+                                else:
+                                    print 'update missing.'
+                                    super(document_set, self).write({'document_set_document_rel_ids':[(1, d_set_d_rel_exist.id, defaults)]})
+                            
+                            #chequear si se updateo o creo un doc. Sino, agregar un missing
+                            if not (doc_added):
+                                if not d_set_d_rel_exist:
+                                    print 'create missing'
+                                    super(document_set, self).write({'document_set_document_rel_ids':[(0, 0, defaults)]})
+                                else:
+                                    print 'update missing'
+                                    super(document_set, self).write({'document_set_document_rel_ids':[(1, d_set_d_rel_exist.id, defaults)]})
+                                
+                        else:
+                            #self.document_set_document_rel_ids |=  self.env['document_control_base.document_set_document_rel'].create(defaults)
+                            print "el resource no reune las condiciones."
+                            if d_set_d_rel_exist:
+                                print "borrar entrada de resource que no aplica."
+                                super(document_set, self).write({'document_set_document_rel_ids':[(2, d_set_d_rel_exist.id, False)]})
+                    else:
+                        print "comparando peras con manzanas"
+
             else:
                 #Si no hay recursos, remover todos los documentos
                 #d_set_d_rel_exist = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id)])

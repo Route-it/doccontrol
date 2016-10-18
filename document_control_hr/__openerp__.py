@@ -24,7 +24,11 @@
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/views.xml',
+        'data/doc_cond.xml',
+        'data/doc_name.xml',
+        'data/res_cond.xml',
+        'data/requirements.xml',
+        'views/views_inherit.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

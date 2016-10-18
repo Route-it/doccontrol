@@ -28,6 +28,7 @@
         'data/doc_name.xml',
         'data/doc_cond.xml',
         'data/res_cond.xml',
+        'data/requirements.xml',
         'views/menu.xml',
         'views/document.xml',
         'views/requirement.xml',

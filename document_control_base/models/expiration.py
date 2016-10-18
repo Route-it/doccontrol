@@ -32,17 +32,13 @@ class expiration(models.Model):
         
             res['arch'] = etree.tostring(doc)
 
-            #fields=res.get('fields',{})
-            #if fields:
-            #        if fields.get('name'):
-            #            res['fields']['name']['readonly'] = True
         return res                         
 
 
     @api.model
     def default_get(self, fields):
         res = super(expiration, self).default_get(fields)
-        if self._context.get('name'):
+        if self._context.get('res_partner_id'):
             if 'name' in fields:
                 partner = self.env['res.partner'].browse(self._context.get('res_partner_id')).name if self._context.get('res_partner_id') else '' 
                 doc = self.env['document_control_base.document_name'].browse(self._context.get('document_name_id')).name if self._context.get('document_name_id') else ''
