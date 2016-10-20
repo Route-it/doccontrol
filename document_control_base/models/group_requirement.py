@@ -17,13 +17,13 @@ class group_requirement(models.Model):
     
     name = fields.Char("Nombre",compute='_compute_name',readonly=True,store=True)
     
-    res_partner_id = fields.Many2one("res.partner","Cliente")
+    res_partner_id = fields.Many2one("res.partner","Cliente",help="Cliente para el cual se lleva adelante el proyecto sobre el que se realiza el control documentario")
     
-    expiration_date = fields.Date("Fecha de caducidad")
+    expiration_date = fields.Date("Fecha de caducidad",help="La fecha en la que se termina esta instancia del proyecto")
      
-    instance = fields.Selection(INSTANCE_SELECTION,"Instancia")
+    instance = fields.Selection(INSTANCE_SELECTION,"Instancia",help="Instancia en la que se encuentra el proyecto sobre el cuál hay que realizar el control documentario")
     
-    requirement_ids = fields.One2many("document_control_base.group_req_requirement_rel", "group_requirement_id","Requerimientos")
+    requirement_ids = fields.One2many("document_control_base.group_req_requirement_rel", "group_requirement_id","Requerimientos",help="requerimientos necesarios para la instancia del proyecto")
     #requirement_ids = fields.Many2many("document_control_base.requirement","document_control_base_group_req_requirement_rel", "group_requirement_id","requirement_id","Requerimientos")
 
     @api.one
