@@ -75,17 +75,17 @@ class document_set(models.Model):
 
         #por cada requerimiento
         for req_id in self.group_requirement_id.requirement_ids:
-            group_req_req_rel = g_req_req_rel_obj.search([('requirement_id','=',req_id.id),('group_requirement_id','=',self.group_requirement_id.id)])
+            group_req_req_rel = g_req_req_rel_obj.search([('requirement_id','=',req_id.requirement_id.id),('group_requirement_id','=',self.group_requirement_id.id)])
             
             #por cada partner
             if len(resources)>0:
                 for resource in resources:
-                    if resource._name == req_id.resource_type:
+                    if resource._name == req_id.requirement_id.resource_type:
                         #busco si existe el registro para el requerimiento & resource
                         property_name = resource._name.replace(".","_")+"_id"
                         
-                        d_set_d_rel_exist = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id),(property_name,'=',resource.id)])
-                        #d_set_d_rel_exist = self.search_d_set_d_rel_with_res([('document_set_id','=',self.id),('requirement_id','=', req_id.id)],resource)
+                        d_set_d_rel_exist = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.requirement_id.id),(property_name,'=',resource.id)])
+                        #d_set_d_rel_exist = self.search_d_set_d_rel_with_res([('document_set_id','=',self.id),('requirement_id','=', req_id.requirement_id.id)],resource)
                         
                         # si hay mas de 1 registro que cumple (no deberia darse el caso), borro el resto que esta de mas. (con 1 alcanza)
                         if len(d_set_d_rel_exist)>1:
@@ -96,9 +96,9 @@ class document_set(models.Model):
                         
                         #si el resource, reune las condiciones del requerimiento,  
                         # o, el resource cumple con todas las condiciones
-                        #if len(resource.resource_condition_ids - req_id.condition_res_ids) == 0:
+                        #if len(resource.resource_condition_ids - req_id.requirement_id.condition_res_ids) == 0:
                         defaults = {property_name:resource.id,'requirement_id':group_req_req_rel.requirement_id.id,'document_name_id':group_req_req_rel.requirement_id.document_name_id.id}
-                        defaults.update({'res_type':req_id.resource_type})  
+                        defaults.update({'res_type':req_id.requirement_id.resource_type})  
 
                         if not bool(group_req_req_rel.priority):
                             group_req_req_rel.priority = 'normal'
@@ -183,7 +183,7 @@ class document_set(models.Model):
 
             else:
                 #Si no hay recursos, remover todos los documentos
-                #d_set_d_rel_exist = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.id)])
+                #d_set_d_rel_exist = d_set_d_rel_obj.search([('document_set_id','=',self.id),('requirement_id','=', req_id.requirement_id.id)])
                 print 'Si no hay recursos, remover todos los documentos'
                 for x in self.document_set_document_rel_ids:
                     super(document_set, self).write({'document_set_document_rel_ids':[(2, x.id, False)]})
