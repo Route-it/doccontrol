@@ -41,7 +41,7 @@
 		<!-- menu categories -->
 		<menuitem name="Agenda" id="expirations.menu_root" parent="document_control_base.menu_root"/>
 		<menuitem name="Control Documentario" id="document_control_base.category_documents_control" parent="document_control_base.menu_root" />
-		<menuitem name="Control Documentario Configuracion" id="document_control_base.category_documents_control_config" parent="document_control_base.menu_root" />
+		<menuitem name="Configuración" id="document_control_base.category_documents_control_config" parent="document_control_base.menu_root" />
 
 		<!-- ACTIONS -->
 		<!-- CONTROL DOCUMENTARIO -->
@@ -66,7 +66,7 @@
 
 		<!-- lista de tipos de recordatorios -->	
 		<menuitem name="Recordatorios" id="expirations.menu_2"
-			parent="expirations.menu_root" action="expirations.alarm_action_window" />
+			parent="document_control_base.category_documents_control_config" action="expirations.alarm_action_window" />
 			
 	<!-- elminar -->			
 	<!--se elimina este: <menuitem name="Calendar" id="mail_menu_calendar" sequence="2" action="action_calendar_event" web_icon="calendar,static/description/icon.png" groups="base.group_user"/> -->
