@@ -19,16 +19,16 @@
 						<h1>
 							<field name="name"  class="oe_edit_only"  />
 						</h1>
-
-						<label for="res_type" class="oe_edit_only" />
+						
+						<group>				
 						<field name="res_type" class="oe_edit_only oe_inline" widget="radio"/>
-						<label for="res_partner_id" attrs="{'invisible':[('res_type', '!=', 'res.partner')]}"  class="oe_edit_only" />
 						<field name="res_partner_id" domain="['|','&amp;','&amp;','&amp;',('is_company', '=', False),('parent_id', '!=', False),
 															 			('active', '=', True),('employee','=',False),
 																'&amp;','&amp;','&amp;',('is_company', '=', True),('parent_id', '=', False),
-																		('active', '=', True),('employee','=',False)
-															]" 
+																		('active', '=', True),('employee','=',False)]" 
 								 attrs="{'invisible':[('res_type', '!=', 'res.partner')]}"  class="oe_edit_only"/>
+						</group>
+						
 						<group>
 							<group>
 								<field name="file_binary" filename="file_name" />
