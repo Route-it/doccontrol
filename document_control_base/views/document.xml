@@ -15,35 +15,34 @@
 			<field name="arch" type="xml">
 				<form string="Documentos">
 					<sheet>
+						<field name="id" invisible="True"/>
 						<label for="name" class="oe_edit_only" />
 						<h1>
 							<field name="name"  class="oe_edit_only"  />
 						</h1>
-						
-						<group>				
+						<group>
 						<field name="res_type" class="oe_edit_only oe_inline" widget="radio"/>
 						<field name="res_partner_id" domain="['|','&amp;','&amp;','&amp;',('is_company', '=', False),('parent_id', '!=', False),
 															 			('active', '=', True),('employee','=',False),
 																'&amp;','&amp;','&amp;',('is_company', '=', True),('parent_id', '=', False),
 																		('active', '=', True),('employee','=',False)]" 
-								 attrs="{'invisible':[('res_type', '!=', 'res.partner')]}"  class="oe_edit_only"/>
+								 attrs="{'invisible':[('res_type', '!=', 'res.partner')],'required':[('res_type','=','res.partner')]}"  class="oe_edit_only  oe_inline"/>
 						</group>
 						
 						<group>
 							<group>
-								<field name="file_binary" filename="file_name" />
+								<field name="file_binary" filename="file_name" required="True"/>
 								<field name="file_name" class="oe_inline oe_right"
 									invisible="1" />
 								<field name="document_name_id" domain="[('res_type','=',res_type)]"/>
-								<field name="document_condition_ids" widget="many2many_tags" />
+								<field name="document_condition_ids" widget="many2many_tags" attrs="{'invisible':[('id','=',False)]}"/>
 								<field name="description" />
 							</group>
 						</group>
-						<group>
-
+						<group attrs="{'invisible':[('id','=',False)]}">
 								<field name="no_expiration" />
 								<field name="expiration_id" 
-									attrs="{'invisible':[('no_expiration','=',True)]}"
+									attrs="{'invisible':['|',('no_expiration','=',True),('id','=',False)]}"
 									context="{'form_view_ref': 'document_control_base.expiration_form','resources':'expirations','name':'Vencimiento:','res_partner_id':res_partner_id,'document_name_id':document_name_id}" />
 								<field name="in_renewal" />
 								<field name="state" readonly="1" class="oe_edit_only" />
@@ -100,8 +99,7 @@
 						<h1>
 							<field name="name" />
 						</h1>
-						<group>
-							<group>
+						<group  string="seccion 1">
 								<field name="id" invisible="1"/>
 								<field name="group_requirement_id" />
 								<field name="control_date"
@@ -118,7 +116,6 @@
 								</field>
 								<field name="description" />
 							</group>
-						</group>
 					</sheet>
 				</form>
 			</field>

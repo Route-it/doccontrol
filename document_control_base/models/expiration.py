@@ -24,6 +24,8 @@ class expiration(models.Model):
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
         res = super(expiration, self).fields_view_get(
             view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu)
+        """
+        Comentado por falta de resolucion de merge de atributo context en herencia de vistas.
         if self._context.get('name'):
             doc = etree.XML(res['arch'])
             node = doc.xpath("//field[@name='name']")[0]
@@ -31,7 +33,7 @@ class expiration(models.Model):
             setup_modifiers(node, res['fields']['name'])
         
             res['arch'] = etree.tostring(doc)
-
+        """
         return res                         
 
 

@@ -24,7 +24,7 @@ class document(models.Model):
      
     name = fields.Char("Nombre",readonly=True,store=True,compute='_compute_name')
     
-    document_name_id =  fields.Many2one("document_control_base.document_name","Nombre del documento")
+    document_name_id =  fields.Many2one("document_control_base.document_name","Nombre del documento",required=True)
      
     document_condition_ids = fields.Many2many("document_control_base.document_condition", "document_condition_rel", "document_id", "condition_id", "Condiciones del documento")
 
@@ -38,7 +38,7 @@ class document(models.Model):
     expiration_id = fields.Many2one("calendar.event",string="Vencimiento")
     
     state = fields.Selection(STATE_SELECTION,
-                                  'Estado', required=True,compute='_compute_state')
+                                  'Estado',compute='_compute_state',default='active')
  
     in_renewal = fields.Boolean("En renovacion")
     
@@ -78,6 +78,12 @@ class document(models.Model):
         resid = self.res_partner_id.name if self.res_partner_id.name else ''
         self.name = resid.title()  + ' - ' + document_name.title() + ' - /' + filename +'/ - ('+state+')'  
 
+
+    @api.onchange('res_type')
+    def onchange_res_type(self):
+        self.document_name_id = False
+        if self.res_type != 'res.partner':
+            self.res_partner_id = False
 
     @api.one
     @api.depends('expiration_id','no_expiration')

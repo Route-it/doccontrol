@@ -14,3 +14,10 @@ class document(models.Model):
         super(document, self)._compute_name()
         resid = self.fleet_vehicle_id.name if self.fleet_vehicle_id.name else ''
         self.name = resid.title()  + self.name
+
+
+    @api.onchange('res_type')
+    def onchange_res_type(self):
+        super(document, self).onchange_res_type()
+        if self.res_type != 'fleet.vehicle':
+            self.fleet_vehicle_id = False

@@ -8,4 +8,5 @@ class hr_employee(models.Model):
     document_ids = fields.One2many('document_control_base.document','hr_employee_id',string="Documentos")
 
     resource_condition_ids = fields.Many2many('document_control_base.resource_condition','hr_employee_resource_condition_rel',
-                                              'hr_employee_id','resource_condition_id',string="Condicionamientos")
+                                              'hr_employee_id','resource_condition_id',string="Coracteristicas/Roles del empleado",
+                                              help="Las características indican qué documentos deberá presentarse por un empleado, cuando su trabajo sea requerido por un cliente")
