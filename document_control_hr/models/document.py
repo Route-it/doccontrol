@@ -14,3 +14,9 @@ class document(models.Model):
         super(document, self)._compute_name()
         resid = self.hr_employee_id.name if self.hr_employee_id.name else ''
         self.name = resid.title()  + self.name
+
+    @api.onchange('res_type')
+    def onchange_res_type(self):
+        super(document, self).onchange_res_type()
+        if self.res_type != 'hr.employee':
+            self.hr_employee_id = False

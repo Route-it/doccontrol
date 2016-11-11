@@ -7,13 +7,13 @@
       <field name="arch" type="xml">
       	
       	<field name="res_partner_id" position="after">
-					<label for="fleet_vehicle_id" attrs="{'invisible':[('res_type', '!=', 'fleet.vehicle')]}" class="oe_edit_only" />
-					<field name="fleet_vehicle_id" attrs="{'invisible':[('res_type', '!=', 'fleet.vehicle')]}" class="oe_edit_only"/>
+					<field name="fleet_vehicle_id" attrs="{'invisible':[('res_type', '!=', 'fleet.vehicle')],'required':[('res_type','=','fleet.vehicle')]}" class="oe_edit_only  oe_inline"/>
       	</field>
 
 		<field name="expiration_id" position="attributes">
-				<attribute name="context">{'form_view_ref': 'document_control_base.expiration_form','resources':'expirations','name':'Vencimiento:','res_partner_id':res_partner_id,'fleet_vehicle_id':fleet_vehicle_id,'document_name_id':document_name_id}</attribute>
+<!-- 				<attribute name="context">{'form_view_ref': 'document_control_base.expiration_form','resources':'expirations','name':'Vencimiento:','res_partner_id':res_partner_id,'fleet_vehicle_id':fleet_vehicle_id,'document_name_id':document_name_id}</attribute> -->
 <!--             <attribute name="context" add=" py.PY_setItem(py.evaluate(expr.first, context),'fleet_vehicle_id', fleet_vehicle_id)" separator=" "></attribute> -->
+            <attribute name="context" merge="{'fleet_vehicle_id':fleet_vehicle_id}" separator=","></attribute>
             
 		</field>
 
@@ -57,10 +57,9 @@
 		<record id="document_control_base.document_set_document_rel_form_fleet" model="ir.ui.view">
 			<field name="model">document_control_base.document_set_document_rel</field>
 		    <field name="inherit_id" ref="document_control_base.document_set_document_rel_form" />
-		    <field name="mode">primary</field> 
 			<field name="arch" type="xml">
-				<field name="res_type" position="after">
-					<field name="fleet_vehicle_id"  attrs="{'invisible':[('res_type', '!=', 'fleet.vehicle')]}" />
+				<field name="res_partner_id" position="after">
+					<field name="fleet_vehicle_id" class="oe_inline" attrs="{'invisible':[('res_type', '!=', 'fleet.vehicle')]}" />
 				</field>
 			</field>
 		</record>
@@ -71,11 +70,11 @@
 			<field name="inherit_id" ref="fleet.fleet_vehicle_form" />
 			<field name="arch" type="xml">
 				<div class="oe_title" position="after">
+					<field name="id" invisible="1"/>
 					<label for="resource_condition_ids"/>
 		            <field name="resource_condition_ids" widget="many2many_tags"  domain="[('res_type','=','fleet.vehicle')]"/>
-                      
-					<label for="document_ids"/>
-                    <field name="document_ids" context="{'default_res_type':'fleet.vehicle','default_fleet_vehicle_id':id}"/>
+					<label for="document_ids" attrs="{'invisible':[('id','=',False)]}" />
+                    <field name="document_ids"  attrs="{'invisible':[('id','=',False)]}" context="{'default_res_type':'fleet.vehicle','default_fleet_vehicle_id':id}"/>
 				</div>
 
 			</field>

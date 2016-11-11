@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from openerp import models, fields, api
+from openerp.exceptions import ValidationError
 
 
 
@@ -18,7 +19,7 @@ class group_req_requirement_rel(models.Model):
     name = fields.Char("Nombre",compute='_compute_name',readonly=True,store=True)
      
     requirement_id = fields.Many2one('document_control_base.requirement', 'Requerimiento')
-    group_requirement_id = fields.Many2one('document_control_base.group_requirement', 'Grupo de Requerimientos')
+    group_requirement_id = fields.Many2one('document_control_base.group_requirement', 'Requisitos de cliente')
 
     priority = fields.Selection(PRIORITY_SELECTION,'Prioridad',default='normal')
 
@@ -26,7 +27,9 @@ class group_req_requirement_rel(models.Model):
     
     
     
-
+    _sql_constraints = [
+        ('client_req_uniq', 'unique(requirement_id, group_requirement_id)', 'Ya existe este requisito cargado para el cliente!'),
+    ]
 
     @api.one
     @api.depends('requirement_id','group_requirement_id')

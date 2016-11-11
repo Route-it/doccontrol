@@ -88,8 +88,8 @@
 			<field name="arch" type="xml">
 				<tree>
 					<field name="name" />
-					<field name="requirement_id"/>
 					<field name="group_requirement_id"/>
+					<field name="requirement_id" domain="[('group_requirement_id','=',group_requirement_id)]"/>
 					<field name="priority"/>
 					<field name="penalty"/>
 				</tree>
